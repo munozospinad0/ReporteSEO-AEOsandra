@@ -1053,6 +1053,262 @@ body {
 @media (max-width: 700px) { .keynav-hint { display: none; } }
 
 /* ============================================
+   MOBILE — pasada responsive completa
+   ============================================ */
+@media (max-width: 900px) {
+  /* En móvil dejamos scroll natural — el snap PPT-style es para desktop */
+  html { scroll-snap-type: none; }
+  .slide {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    min-height: auto;
+    padding: 56px 22px;
+    align-items: flex-start;
+  }
+
+  /* Counter más pequeño y discreto */
+  .counter {
+    bottom: 14px;
+    right: 14px;
+    padding: 5px 10px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    gap: 6px;
+  }
+
+  /* Progress más sutil */
+  .progress-fill { box-shadow: none; }
+
+  /* Hint de teclado no aplica en móvil */
+  .keynav-hint { display: none; }
+
+  /* Scroll cue oculto en móvil */
+  .scroll-cue { display: none; }
+
+  /* Ocultar number-fantasma decorativo grande para no romper layout */
+  .ghost { opacity: 0.035 !important; font-size: 45vw !important; }
+  .slide.deep .ghost { opacity: 0.06 !important; }
+
+  /* === COVER (slide 1) === */
+  .cover-grid { padding: 0 24px; gap: 32px; }
+  .cover-bg-letters { display: none; }
+
+  /* === HOOK (slide 1 contenido) === */
+  .hook .pretitle { font-size: 9px; margin-bottom: 28px; letter-spacing: 0.25em; }
+  .hook-prompt { margin-top: 36px; padding-top: 24px; }
+  .hook-prompt::before { font-size: 8px; margin-bottom: 12px; letter-spacing: 0.25em; }
+  .hook-answer { font-size: 0.95rem; }
+
+  /* === TÍTULOS — escalas para móvil === */
+  .title.lg { font-size: clamp(1.85rem, 7.5vw, 2.6rem); }
+  .title.xl { font-size: clamp(2.1rem, 8vw, 3.2rem); }
+  .title.xxl { font-size: clamp(2.4rem, 9vw, 3.8rem); }
+  .title-underline { width: 56px; height: 6px; }
+
+  /* === EYEBROW más compacto === */
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    margin-bottom: 20px;
+  }
+  .eyebrow::before { width: 18px; margin-right: 12px; }
+
+  /* === LEAD / BODY === */
+  .lead { font-size: 1.1rem; line-height: 1.45; margin-bottom: 24px; }
+  .body, .body p { font-size: 0.98rem; line-height: 1.7; }
+
+  /* === SLIDE GRID — ya cae a 1 col, pero ajusto gap === */
+  .s-grid { gap: 32px; }
+
+  /* === SLIDE 2 — big number === */
+  .big-num .from-to {
+    font-size: clamp(4.5rem, 22vw, 8rem);
+    margin: 32px 0;
+  }
+
+  /* === SLIDE 3 — pillars en 1 columna === */
+  .pillars { grid-template-columns: 1fr; }
+  .pillar { padding: 22px 18px; }
+  .pillar .num { font-size: 1.5rem; margin-bottom: 10px; }
+  .pillar h4 { font-size: 1.05rem; }
+  .pillar p { font-size: 0.85rem; }
+
+  /* === SLIDE 4 — sample card === */
+  .sample-tab { font-size: 10px; padding: 10px 16px 6px; }
+  .sample-body {
+    font-size: 11px;
+    padding: 14px 16px 18px;
+    line-height: 1.6;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* === SLIDE 5 — bots grid 2 cols, más compacto === */
+  .bots { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .bot { padding: 9px 11px; font-size: 10px; }
+  .bot .vendor { font-size: 7.5px; }
+
+  /* === SLIDE 6 — FAQs === */
+  .faq-item { padding: 16px 18px; }
+  .faq-q { font-size: 0.95rem; gap: 10px; }
+  .faq-a { font-size: 0.85rem; margin-top: 12px; padding-top: 12px; line-height: 1.65; }
+
+  /* === SLIDE 7 — URL tree === */
+  .url-tree {
+    font-size: 10px;
+    padding: 18px;
+    line-height: 1.75;
+    grid-template-columns: 1fr 1fr;
+  }
+  .url-tree .h { font-size: 8.5px; margin-top: 14px; }
+  .url-tree .url .l { font-size: 8px; }
+
+  /* === SLIDE 8 — Authority === */
+  .authority-portrait { width: 160px; margin-bottom: 32px; }
+  .tags-cloud { gap: 6px; max-width: 100%; }
+  .tag { font-size: 9.5px; padding: 4px 9px; }
+
+  /* === SLIDE 9 — Star page === */
+  .star-page { padding: 28px 22px; }
+  .star-page::before {
+    left: 14px;
+    font-size: 9px;
+    padding: 0 8px;
+  }
+  .star-h1 { font-size: clamp(1.3rem, 5vw, 1.8rem); margin-bottom: 18px; }
+  .star-lead { font-size: 0.9rem; margin-bottom: 20px; padding-bottom: 20px; }
+  .star-reason h4 { font-size: 1rem; }
+  .star-reason p { font-size: 0.82rem; }
+
+  /* === SLIDE 10 — Books === */
+  .book { padding: 24px 20px; }
+  .book h4 { font-size: 1.08rem; }
+  .book ul { font-size: 0.83rem; }
+
+  /* === SLIDE 11 — A11y demo === */
+  .a11y-demo { padding: 20px; max-width: 100%; }
+  .a11y-demo .head {
+    padding: 12px 16px;
+    margin: -20px -20px 14px;
+    font-size: 1rem;
+  }
+  .a11y-demo .head small { font-size: 8px; }
+  .a11y-demo .row { font-size: 0.85rem; padding: 9px 0; }
+
+  /* === SLIDE 12 — Numbers row === */
+  .numbers-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 40px 0;
+  }
+  .number { padding: 18px 4px; }
+  .number .n { font-size: clamp(2.4rem, 13vw, 4rem); }
+  .number .l { font-size: 8.5px; letter-spacing: 0.2em; }
+
+  /* === SLIDE 13 — Timeline ya cae vertical === */
+  .tl-step { padding-left: 28px; }
+  .tl-step h5 { font-size: 0.95rem; }
+  .tl-step p { font-size: 0.78rem; }
+  .tl-step .marker { font-size: 8.5px; }
+
+  /* === SLIDE 14 — Prompts === */
+  .prompt { padding: 14px 16px; }
+  .prompt-text { font-size: 0.9rem; line-height: 1.4; }
+  .prompt-copy { font-size: 8.5px; padding: 5px 8px; }
+
+  /* === SLIDE 15 — Roadmap === */
+  .road-item { padding: 22px 18px; }
+  .road-item h4 { font-size: 1.05rem; }
+  .road-item p { font-size: 0.82rem; }
+
+  /* === SLIDE 16 — Closing === */
+  .signature-block .sig-name, .closing-name {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+  .closing-meta {
+    gap: 22px;
+    padding-top: 28px;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .closing-meta div { font-size: 8.5px; }
+  .closing-meta div strong { font-size: 1.15rem; }
+}
+
+/* ============================================
+   TINY PHONES (< 480px) — refinamiento final
+   ============================================ */
+@media (max-width: 480px) {
+  .slide { padding: 48px 18px; }
+
+  /* Counter aún más mini */
+  .counter {
+    bottom: 12px;
+    right: 12px;
+    font-size: 8.5px;
+    padding: 5px 9px;
+  }
+
+  /* Títulos comprimidos */
+  .title.lg { font-size: clamp(1.65rem, 8vw, 2rem); }
+  .title.xl { font-size: clamp(1.85rem, 9vw, 2.4rem); }
+  .title.xxl { font-size: clamp(2.1rem, 10vw, 2.8rem); }
+  .title-underline { width: 48px; height: 5px; }
+
+  /* Hook responsive */
+  .hook .pretitle { font-size: 8px; margin-bottom: 22px; }
+  .hook-prompt { margin-top: 28px; padding-top: 20px; }
+
+  /* Big number en mini phone */
+  .big-num .from-to { font-size: clamp(4rem, 22vw, 5.5rem); }
+
+  /* Bots a 1 columna en tiny */
+  .bots { grid-template-columns: 1fr; }
+  .bot { padding: 10px 14px; font-size: 11px; }
+
+  /* URL tree a 1 columna en tiny */
+  .url-tree { grid-template-columns: 1fr; font-size: 10.5px; }
+
+  /* Authority portrait más pequeño */
+  .authority-portrait { width: 140px; margin-bottom: 28px; }
+  .tag { font-size: 9px; padding: 3px 8px; }
+
+  /* Numbers 2 cols pero más comprimido */
+  .numbers-row { gap: 10px; }
+  .number .n { font-size: 2.2rem; }
+
+  /* Star page condensado */
+  .star-page { padding: 24px 18px; }
+  .star-h1 { font-size: 1.3rem; }
+
+  /* Pillars padding ajustado */
+  .pillar { padding: 20px 16px; }
+
+  /* Lead más compacto */
+  .lead { font-size: 1.05rem; }
+
+  /* Closing meta */
+  .closing-name { font-size: 2.4rem; }
+
+  /* Ghosts decorativos: ocultar en tiny para máximo espacio útil */
+  .ghost { display: none !important; }
+
+  /* Sample body fuente fija razonable */
+  .sample-body { font-size: 10.5px; }
+}
+
+/* ============================================
+   LANDSCAPE PHONES — altura limitada
+   ============================================ */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .slide { padding: 32px 24px; }
+  .hook .pretitle { margin-bottom: 16px; }
+  .title-underline { margin-top: 4px; }
+  .hook-prompt { margin-top: 20px; padding-top: 14px; }
+}
+
+/* ============================================
    PRINT
    ============================================ */
 @media print {
