@@ -3,1549 +3,1940 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandra Clavijo · Reporte de Posicionamiento AEO</title>
-<meta name="description" content="Cómo preparamos sclavijo.com para ser citado por ChatGPT, Claude, Perplexity y Gemini. Por Daniel Muñoz, Ceibatic.">
+<title>Sandra Clavijo · Cómo le enseñamos a la IA quién eres</title>
+<meta name="description" content="Reporte de posicionamiento AEO para sclavijo.com. Por Daniel Muñoz · Ceibatic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ============================================
+   CHAMBERS — A private letter from counsel.
+   Quiet. Confident. Made by hand.
+   ============================================ */
+
 :root {
-  --ink: #0d0d0d;
-  --ink-soft: #2a2a2a;
-  --paper: #f7f4ed;
-  --paper-warm: #efe9dc;
-  --paper-dark: #1a1816;
-  --accent: #c8a04c;
-  --accent-bright: #e8c266;
-  --accent-soft: rgba(200, 160, 76, 0.12);
-  --rule: rgba(13, 13, 13, 0.12);
-  --rule-light: rgba(13, 13, 13, 0.06);
-  --rule-dark: rgba(255, 255, 255, 0.12);
-  --muted: rgba(13, 13, 13, 0.6);
-  --muted-dark: rgba(255, 255, 255, 0.6);
+  --cream: #f5f0e8;
+  --cream-deep: #efe9dc;
+  --cream-card: #faf6ed;
+  --navy: #0a2e5c;
+  --navy-deep: #061b3a;
+  --gold: #d4a017;
+  --gold-bright: #e8c266;
+  --charcoal: #1a1a1a;
+  --ink: #2a2a2a;
+  --muted: #6b6760;
+  --hairline: rgba(10, 46, 92, 0.14);
+  --hairline-soft: rgba(10, 46, 92, 0.07);
+  --hairline-gold: rgba(212, 160, 23, 0.4);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--paper);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--cream);
   color: var(--ink);
+  font-weight: 300;
+  font-size: 16px;
   line-height: 1.6;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-.serif { font-family: 'Fraunces', Georgia, serif; }
+.serif { font-family: 'Playfair Display', Georgia, serif; }
+.mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
 
-/* =================== PROGRESS BAR =================== */
+/* ============================================
+   PROGRESS RAIL (top of viewport)
+   ============================================ */
 .progress {
   position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(212, 160, 23, 0.12);
   z-index: 1000;
-  transition: width 0.1s ease;
-  box-shadow: 0 0 8px rgba(200, 160, 76, 0.6);
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  width: 0;
+  transition: width 0.18s ease;
+  box-shadow: 0 0 8px rgba(212, 160, 23, 0.5);
 }
 
-/* =================== MASTHEAD (sticky) =================== */
-.masthead {
+/* ============================================
+   SLIDE COUNTER (bottom right)
+   ============================================ */
+.counter {
   position: fixed;
-  top: 8px; left: 0; right: 0;
+  bottom: 28px;
+  right: 32px;
   z-index: 100;
-  padding: 16px 32px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--cream-card);
+  padding: 8px 14px;
+  border: 1px solid var(--hairline);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: rgba(247, 244, 237, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--rule-light);
-  transform: translateY(-100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 10px;
 }
-.masthead.show { transform: translateY(0); }
-.masthead .mh-left, .masthead .mh-right {
-  display: flex; align-items: center; gap: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.masthead .mh-issue {
-  color: var(--accent);
-  font-weight: 700;
-}
-.masthead .mh-title {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
+.counter .gold { color: var(--gold); font-weight: 600; }
+.dark-mode .counter { color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
 
-/* =================== COVER =================== */
-.cover {
+/* ============================================
+   SLIDE BASE
+   ============================================ */
+.slide {
   min-height: 100vh;
-  background: var(--paper-warm);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  align-items: center;
+  padding: 80px 8vw;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  padding: 120px 0 80px;
+}
+.slide.deep {
+  background: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.95);
+}
+.slide.deep .eyebrow { color: var(--gold-bright); }
+.slide.deep .title { color: #fff; }
+.slide.deep .body, .slide.deep p { color: rgba(255, 255, 255, 0.78); }
+
+@media (max-width: 800px) {
+  .slide { padding: 60px 28px; }
 }
 
-.cover-grid {
+/* ============================================
+   SLIDE GRID — asymmetric editorial
+   ============================================ */
+.s-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: 80px;
-  align-items: center;
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 64px;
+  align-items: center;
+}
+@media (max-width: 1000px) {
+  .s-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.s-center {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============================================
+   SLIDE TYPOGRAPHY
+   ============================================ */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  display: inline-block;
+  position: relative;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  vertical-align: middle;
+  margin-right: 14px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 32px;
+  position: relative;
+}
+.title.lg { font-size: clamp(2.2rem, 4.5vw, 4rem); }
+.title.xl { font-size: clamp(2.8rem, 6vw, 5.5rem); }
+.title.xxl { font-size: clamp(3.5rem, 8vw, 7.5rem); }
+
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+/* Hand-drawn gold underline animation */
+.title-underline {
+  display: block;
+  margin-top: 8px;
+  width: 88px;
+  height: 8px;
+  position: relative;
+}
+.title-underline svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.title-underline path {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.6, 0, 0.3, 1);
+}
+.slide.visible .title-underline path { stroke-dashoffset: 0; }
+
+.body, .body p {
+  font-size: 1.05rem;
+  color: var(--ink);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 540px;
+}
+.body p + p { margin-top: 18px; }
+
+.body strong, .body b {
+  font-weight: 500;
+  color: var(--navy);
+}
+.slide.deep .body strong { color: var(--gold-bright); }
+
+.lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-bottom: 28px;
+  max-width: 600px;
+}
+.slide.deep .lead { color: rgba(255,255,255,0.7); }
+
+/* ============================================
+   REVEAL ANIMATIONS
+   ============================================ */
+.r {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide.visible .r { opacity: 1; transform: none; }
+.slide.visible .r-1 { transition-delay: 0.1s; }
+.slide.visible .r-2 { transition-delay: 0.25s; }
+.slide.visible .r-3 { transition-delay: 0.4s; }
+.slide.visible .r-4 { transition-delay: 0.55s; }
+.slide.visible .r-5 { transition-delay: 0.7s; }
+.slide.visible .r-6 { transition-delay: 0.85s; }
+
+/* ============================================
+   CODE SAMPLE CARD
+   ============================================ */
+.sample {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline-gold);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 32px -8px rgba(10, 46, 92, 0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.sample:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -8px rgba(10, 46, 92, 0.18); }
+
+.sample-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  padding: 12px 20px 8px;
+  border-bottom: 1px solid var(--hairline-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sample-tab::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.sample-body {
+  padding: 18px 20px 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.sample-body .k { color: var(--navy); font-weight: 500; }
+.sample-body .s { color: #7a4a14; }
+.sample-body .n { color: #b8860b; }
+.sample-body .c { color: var(--muted); font-style: italic; }
+.sample-body .p { color: var(--muted); }
+.sample-body .em { color: var(--gold); font-weight: 600; }
+
+.slide.deep .sample {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(212, 160, 23, 0.25);
+}
+.slide.deep .sample-body { color: rgba(255,255,255,0.85); }
+.slide.deep .sample-body .k { color: var(--gold-bright); }
+.slide.deep .sample-body .s { color: #b8e6b3; }
+.slide.deep .sample-body .c { color: rgba(255,255,255,0.4); }
+
+/* ============================================
+   SLIDE 1 — HOOK
+   ============================================ */
+.hook {
+  text-align: center;
   position: relative;
   z-index: 2;
 }
-@media (max-width: 900px) {
-  .cover-grid { grid-template-columns: 1fr; gap: 48px; padding: 0 28px; }
-}
-
-.cover-issue {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 0.7rem;
-  font-weight: 700;
+.hook .pretitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 40px;
-}
-.cover-issue::before, .cover-issue::after {
-  content: '';
-  height: 1px;
-  width: 28px;
-  background: var(--accent);
-}
-
-.cover h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: -0.035em;
-  color: var(--ink);
-  margin-bottom: 32px;
-  font-variation-settings: "opsz" 144;
-}
-.cover h1 em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-}
-
-.cover-deck {
-  font-family: 'Fraunces', serif;
-  font-size: 1.35rem;
-  line-height: 1.5;
-  color: var(--muted);
-  max-width: 560px;
-  font-weight: 400;
+  color: var(--gold);
   margin-bottom: 48px;
+}
+.hook-prompt {
+  font-family: 'Playfair Display', serif;
   font-style: italic;
-}
-
-.cover-byline {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding-top: 32px;
-  border-top: 1px solid var(--rule);
-  margin-top: 32px;
-}
-.cover-byline-dash {
-  width: 40px; height: 2px;
-  background: var(--ink);
-}
-.cover-byline .info {
-  font-size: 0.8rem;
-}
-.cover-byline .info .label {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.cover-byline .info strong {
+.hook-prompt::before {
+  content: 'PREGUNTA EN CHATGPT';
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 16px;
   font-weight: 600;
-  color: var(--ink);
 }
-
-/* Cover photo with editorial frame */
-.cover-photo {
-  position: relative;
-  aspect-ratio: 3/4;
-  background: var(--paper-dark);
-  overflow: hidden;
-}
-.cover-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: contrast(1.05) saturate(0.95);
-}
-.cover-photo::after {
-  content: 'Sandra Clavijo, Esq.';
-  position: absolute;
-  bottom: 24px; left: 24px;
-  background: var(--paper);
-  padding: 8px 14px;
-  font-family: 'Fraunces', serif;
+.hook-answer {
+  margin-top: 20px;
+  font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 0.01em;
+  font-size: 1.05rem;
+  color: var(--navy);
 }
-.cover-photo::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border: 1px solid var(--ink);
-  pointer-events: none;
-  z-index: 1;
+.hook-answer .typing {
+  border-right: 2px solid var(--gold);
+  padding-right: 4px;
+  animation: caret 0.9s steps(1) infinite;
 }
+@keyframes caret { 0%, 100% { border-color: var(--gold); } 50% { border-color: transparent; } }
 
-.cover-bg-letters {
+/* ============================================
+   GHOST NUMBER (background watermark)
+   ============================================ */
+.ghost {
   position: absolute;
-  font-family: 'Fraunces', serif;
-  font-size: clamp(20rem, 40vw, 36rem);
-  font-weight: 200;
+  font-family: 'Playfair Display', serif;
   font-style: italic;
-  color: var(--ink);
-  opacity: 0.025;
-  bottom: -8vw;
-  left: -2vw;
-  line-height: 0.8;
+  font-weight: 400;
+  color: var(--navy);
+  opacity: 0.05;
   pointer-events: none;
   user-select: none;
-  font-variation-settings: "opsz" 144;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
 }
+.slide.deep .ghost { color: var(--gold); opacity: 0.08; }
 
-.scroll-cue {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  z-index: 3;
-}
-.scroll-cue::after {
-  content: '';
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(180deg, var(--ink), transparent);
-  animation: pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-  50% { transform: scaleY(0.4); transform-origin: top; opacity: 0.4; }
-}
-
-/* =================== SECTION SHELL =================== */
-.section {
-  padding: 140px 0;
-  position: relative;
-}
-.section.dark {
-  background: var(--paper-dark);
-  color: rgba(255,255,255,0.92);
-}
-.section.dark h2, .section.dark h3, .section.dark .pullq { color: #fff; }
-.section.dark .eyebrow { color: var(--accent-bright); }
-.section.dark .rule { background: var(--rule-dark); }
-.section.dark .lead { color: rgba(255,255,255,0.7); }
-.section.warm { background: var(--paper-warm); }
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 64px;
-}
-.col-narrow {
-  max-width: 720px;
-  margin: 0 auto;
-}
-@media (max-width: 700px) {
-  .container { padding: 0 28px; }
-  .section { padding: 80px 0; }
-}
-
-.eyebrow {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 24px;
-  display: inline-block;
-}
-.eyebrow.with-num::before {
-  content: attr(data-num) ' · ';
-  color: var(--ink);
-}
-.dark .eyebrow.with-num::before { color: rgba(255,255,255,0.5); }
-
-.section h2.dropline {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 500;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  margin-bottom: 40px;
-  font-variation-settings: "opsz" 144;
-}
-.section h2.dropline em {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-}
-
-.rule {
-  width: 60px;
-  height: 1px;
-  background: var(--ink);
-  margin: 32px 0;
-}
-
-.lead {
-  font-family: 'Fraunces', serif;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--muted);
-  margin-bottom: 40px;
-  font-style: italic;
-  max-width: 720px;
-}
-
-p {
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: var(--ink-soft);
-  margin-bottom: 24px;
-}
-.dark p { color: rgba(255,255,255,0.85); }
-
-p.drop::first-letter {
-  font-family: 'Fraunces', serif;
-  font-size: 4.5rem;
-  font-weight: 500;
-  float: left;
-  line-height: 0.95;
-  margin: 6px 14px 0 0;
-  color: var(--accent);
-  font-variation-settings: "opsz" 144;
-}
-
-/* =================== PULL QUOTE =================== */
-.pullq {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  margin: 80px auto;
-  text-align: center;
-  max-width: 820px;
-  position: relative;
-  padding: 40px 0;
-}
-.pullq::before, .pullq::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  width: 60px;
-  height: 1px;
-  background: var(--accent);
-  transform: translateX(-50%);
-}
-.pullq::before { top: 0; }
-.pullq::after { bottom: 0; }
-.pullq cite {
-  display: block;
-  font-style: normal;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 24px;
-}
-
-/* =================== BIG NUMBER ROW =================== */
-.numbers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0;
-  margin: 64px 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-.dark .numbers { border-color: var(--rule-dark); }
-.num-cell {
-  padding: 48px 32px;
-  text-align: center;
-  border-right: 1px solid var(--rule);
-}
-.dark .num-cell { border-color: var(--rule-dark); }
-.num-cell:last-child { border-right: none; }
-@media (max-width: 700px) {
-  .num-cell { border-right: none; border-bottom: 1px solid var(--rule); }
-  .num-cell:last-child { border-bottom: none; }
-}
-.num-cell .n {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(3rem, 7vw, 5rem);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1;
-  margin-bottom: 12px;
-  color: var(--ink);
-  font-variation-settings: "opsz" 144;
-  letter-spacing: -0.02em;
-}
-.dark .num-cell .n { color: var(--accent-bright); }
-.num-cell .l {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.dark .num-cell .l { color: rgba(255,255,255,0.5); }
-
-/* =================== TWO COLUMNS =================== */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  margin: 64px 0;
-}
-@media (max-width: 800px) { .two-col { grid-template-columns: 1fr; gap: 48px; } }
-
-.col h3 {
-  font-family: 'Fraunces', serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  font-style: normal;
-}
-.col.before h3 { color: #a02020; }
-.col.after h3 { color: #2d6a3f; }
-
-.col ul { list-style: none; }
-.col li {
-  padding: 14px 0;
-  padding-left: 24px;
-  font-size: 0.95rem;
-  color: var(--ink-soft);
-  border-bottom: 1px solid var(--rule);
-  line-height: 1.55;
-  position: relative;
-}
-.col li:last-child { border: none; }
-.col li::before {
-  position: absolute;
-  left: 0;
-  font-family: 'Fraunces', serif;
-  font-weight: 500;
-  font-size: 1.1rem;
-}
-.col.before li::before { content: '×'; color: #a02020; }
-.col.after li::before { content: '✓'; color: #2d6a3f; }
-
-/* =================== EDITORIAL TIMELINE =================== */
-.tl-list {
-  margin: 64px 0;
-  border-top: 1px solid var(--rule);
-}
-.tl-row {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 48px;
-  padding: 48px 0;
-  border-bottom: 1px solid var(--rule);
-  position: relative;
-}
-.dark .tl-row { border-color: var(--rule-dark); }
-@media (max-width: 700px) {
-  .tl-row { grid-template-columns: 1fr; gap: 16px; }
-}
-.tl-marker {
-  font-family: 'Inter', monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.tl-marker .phase {
-  display: block;
-  font-family: 'Fraunces', serif;
-  font-size: 3rem;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin-top: 6px;
-  line-height: 1;
-}
-.dark .tl-marker .phase { color: #fff; }
-.tl-title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.7rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  margin-bottom: 16px;
-  color: var(--ink);
-}
-.dark .tl-title { color: #fff; }
-.tl-body {
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 580px;
-}
-.dark .tl-body { color: rgba(255,255,255,0.7); }
-.tl-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
-}
-.tl-tag {
-  font-family: 'Inter', monospace;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border-radius: 2px;
-}
-.dark .tl-tag { background: rgba(232, 194, 102, 0.15); color: var(--accent-bright); }
-
-/* =================== EDITORIAL IMAGE =================== */
-.img-feature {
-  margin: 80px 0;
-}
-.img-feature figure {
-  position: relative;
-}
-.img-feature img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16/9;
-  object-fit: cover;
-  filter: contrast(1.03) saturate(0.95);
-}
-.img-feature figcaption {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  margin-top: 16px;
-  color: var(--muted);
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.dark .img-feature figcaption { color: rgba(255,255,255,0.6); }
-.img-feature figcaption::before {
-  content: '';
-  width: 24px; height: 1px;
-  background: var(--ink);
-  margin-top: 12px;
-  flex-shrink: 0;
-}
-.dark .img-feature figcaption::before { background: rgba(255,255,255,0.6); }
-
-/* =================== EDITORIAL TWO-FACE =================== */
-.feature-split {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 64px;
-  align-items: center;
-  margin: 80px 0;
-}
-@media (max-width: 800px) {
-  .feature-split { grid-template-columns: 1fr; gap: 40px; }
-}
-.feature-split.reverse { grid-template-columns: 1.1fr 0.9fr; }
-.feature-split.reverse .feature-img { order: 2; }
-.feature-img {
-  position: relative;
-  aspect-ratio: 4/5;
-  overflow: hidden;
-}
-.feature-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.feature-text h3 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
-  color: var(--ink);
-}
-.dark .feature-text h3 { color: #fff; }
-
-/* =================== STRATEGY GRID =================== */
-.strategy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  margin: 64px 0;
-}
-.dark .strategy-grid { background: var(--rule-dark); }
-.strategy-cell {
-  background: var(--paper);
-  padding: 40px 32px;
-  transition: background 0.3s ease;
-}
-.dark .strategy-cell { background: var(--paper-dark); }
-.strategy-cell:hover { background: var(--paper-warm); }
-.dark .strategy-cell:hover { background: rgba(255,255,255,0.03); }
-.strategy-cell .sn {
-  font-family: 'Fraunces', serif;
-  font-size: 2.5rem;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--accent);
-  margin-bottom: 16px;
-  line-height: 1;
-}
-.strategy-cell h4 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  font-weight: 500;
-  line-height: 1.3;
-  margin-bottom: 12px;
-  color: var(--ink);
-}
-.dark .strategy-cell h4 { color: #fff; }
-.strategy-cell p {
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-.dark .strategy-cell p { color: rgba(255,255,255,0.6); }
-.strategy-cell .status {
-  display: inline-block;
-  font-family: 'Inter', monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-}
-.strategy-cell .status.done { color: #2d6a3f; }
-.strategy-cell .status.offsite { color: #a87d20; }
-
-/* =================== TABLE EDITORIAL =================== */
-.editorial-table {
-  margin: 64px 0;
-  border-top: 1px solid var(--ink);
-}
-.et-row {
-  display: grid;
-  grid-template-columns: 1.4fr 80px 80px;
-  gap: 32px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--rule);
-  align-items: center;
-}
-.dark .et-row { border-color: var(--rule-dark); }
-.dark .editorial-table { border-color: #fff; }
-.et-row.header {
-  border-bottom: 1px solid var(--ink);
-  padding: 16px 0;
-}
-.dark .et-row.header { border-bottom-color: #fff; }
-.et-row.header div {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.et-row.star {
-  background: var(--accent-soft);
-  padding: 24px 16px;
-  margin: 0 -16px;
-}
-.dark .et-row.star { background: rgba(232, 194, 102, 0.08); }
-.et-page {
-  font-family: 'Fraunces', serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-.et-page small {
-  display: block;
-  font-family: 'Inter', monospace;
-  font-size: 0.75rem;
-  color: var(--muted);
-  font-weight: 400;
-  margin-top: 2px;
-}
-.et-cell {
+/* ============================================
+   SLIDE 2 — BIG NUMBER
+   ============================================ */
+.big-num {
   text-align: center;
 }
-.checkmark {
-  font-family: 'Fraunces', serif;
-  font-size: 1.4rem;
-  color: var(--accent);
+.big-num .from-to {
+  font-family: 'Playfair Display', serif;
   font-weight: 400;
-}
-.dot { color: var(--muted); }
-
-@media (max-width: 700px) {
-  .et-row { grid-template-columns: 1fr 60px 60px; gap: 12px; }
-  .et-row.header div { font-size: 0.6rem; }
-}
-
-/* =================== EDITORIAL CHECKLIST =================== */
-.editorial-list {
+  font-style: italic;
+  font-size: clamp(5rem, 14vw, 14rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--gold-bright);
   margin: 48px 0;
 }
-.el-item {
-  padding: 28px 0;
-  border-bottom: 1px solid var(--rule);
+.big-num .from-to .arrow {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.7em;
+  margin: 0 0.25em;
+  font-style: normal;
+}
+
+/* ============================================
+   PILLAR LIST (boss strategy)
+   ============================================ */
+.pillars {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+.pillar {
+  background: var(--cream);
+  padding: 32px 28px;
+  transition: background 0.4s ease;
+  position: relative;
+}
+.pillar:hover { background: var(--cream-card); }
+.pillar .num {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+  display: block;
+}
+.pillar h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.pillar p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.pillar .status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pillar .status.done { color: #2d6a3f; }
+.pillar .status.offsite { color: #a87d20; }
+
+/* ============================================
+   BOT GRID (slide 5)
+   ============================================ */
+.bots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+@media (max-width: 700px) { .bots { grid-template-columns: repeat(2, 1fr); } }
+.bot {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline);
+  padding: 12px 14px;
+  color: var(--navy);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+.bot:hover {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+.bot::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+}
+.bot:hover::before { color: var(--navy); }
+.bot .vendor {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* ============================================
+   FAQ ACCORDION (slide 6)
+   ============================================ */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline);
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.faq-item:hover { border-color: var(--hairline-gold); }
+.faq-item.open { border-color: var(--gold); background: #fff; }
+.faq-q {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--navy);
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.faq-q::before {
+  content: 'P.';
+  color: var(--gold);
+  font-style: italic;
+  flex-shrink: 0;
+  font-weight: 400;
+}
+.faq-a {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline-soft);
+  font-size: 0.93rem;
+  color: var(--ink);
+  line-height: 1.7;
+  display: none;
+}
+.faq-a::before {
+  content: 'R.';
+  color: var(--gold);
+  font-style: italic;
+  margin-right: 8px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ============================================
+   URL TREE (slide 7)
+   ============================================ */
+.url-tree {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  background: var(--cream-card);
+  border: 1px solid var(--hairline);
+  padding: 24px;
+  line-height: 1.8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+@media (max-width: 700px) { .url-tree { grid-template-columns: 1fr; } }
+.url-tree .h {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 4px;
+  grid-column: 1 / -1;
+}
+.url-tree .h:first-child { margin-top: 0; }
+.url-tree .url {
+  color: var(--navy);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.url-tree .url .l {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  margin-right: 6px;
+}
+
+/* ============================================
+   AUTHORITY ORBIT (slide 8 deep)
+   ============================================ */
+.authority {
+  text-align: center;
+  position: relative;
+}
+.authority-portrait {
+  width: clamp(180px, 22vw, 280px);
+  aspect-ratio: 3/4;
+  border: 1px solid rgba(212, 160, 23, 0.4);
+  margin: 0 auto 48px;
+  overflow: hidden;
+  position: relative;
+}
+.authority-portrait img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 160, 23, 0.3);
+  color: var(--gold-bright);
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+.tag:hover { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); }
+
+/* ============================================
+   STAR PAGE (slide 9)
+   ============================================ */
+.star-page {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline-gold);
+  padding: 36px;
+  position: relative;
+}
+.star-page::before {
+  content: 'sclavijo.com/en/best-immigration-lawyer-miami';
+  position: absolute;
+  top: -10px; left: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--gold);
+  background: var(--cream);
+  padding: 0 12px;
+  letter-spacing: 0.05em;
+}
+.star-h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+.star-h1 em { font-style: italic; color: var(--gold); }
+.star-lead {
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--hairline-soft);
+}
+.star-reason {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 16px;
   align-items: start;
 }
-.dark .el-item { border-color: var(--rule-dark); }
-.el-item:last-child { border: none; }
-.el-num {
-  font-family: 'Fraunces', serif;
+.star-reason .n {
+  font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 1.6rem;
-  color: var(--accent);
+  color: var(--gold);
+  font-size: 1.4rem;
   line-height: 1;
 }
-.el-item h4 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.25rem;
+.star-reason h4 {
+  font-family: 'Playfair Display', serif;
   font-weight: 500;
-  margin-bottom: 8px;
-  color: var(--ink);
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-bottom: 4px;
 }
-.dark .el-item h4 { color: #fff; }
-.el-item p {
-  font-size: 0.95rem;
+.star-reason p {
+  font-size: 0.88rem;
   color: var(--muted);
   margin: 0;
+  line-height: 1.55;
 }
-.dark .el-item p { color: rgba(255,255,255,0.65); }
 
-/* =================== FOOTER COLOPHON =================== */
-.colophon {
-  background: var(--paper-dark);
-  color: rgba(255,255,255,0.7);
-  padding: 100px 0 60px;
+/* ============================================
+   GOVERNANCE BOOKS (slide 10)
+   ============================================ */
+.books { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 700px) { .books { grid-template-columns: 1fr; } }
+.book {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline);
+  padding: 28px 24px;
   position: relative;
-  overflow: hidden;
 }
-.colophon-mark {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(8rem, 18vw, 16rem);
-  font-weight: 200;
-  font-style: italic;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: #fff;
-  opacity: 0.08;
+.book::before {
+  content: '';
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  user-select: none;
-  font-variation-settings: "opsz" 144;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--gold);
 }
-.colophon-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 48px;
+.book .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.book h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+.book ul {
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.book li {
+  padding-left: 16px;
   position: relative;
-  z-index: 1;
-  padding-top: 60px;
+  margin-bottom: 8px;
 }
-.col-block .label {
-  font-size: 0.65rem;
+.book li::before {
+  content: '·';
+  position: absolute;
+  left: 4px;
+  color: var(--gold);
   font-weight: 700;
+}
+
+/* ============================================
+   ACCESSIBILITY WIDGET MOCKUP (slide 11)
+   ============================================ */
+.a11y-demo {
+  background: #fff;
+  border: 1px solid var(--hairline);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px -12px rgba(10, 46, 92, 0.2);
+  max-width: 360px;
+}
+.a11y-demo .head {
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 18px;
+  margin: -24px -24px 18px;
+  border-radius: 12px 12px 0 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.a11y-demo .head small {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold-bright);
+  margin-top: 2px;
+  font-weight: 500;
+}
+.a11y-demo .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hairline-soft);
+  font-size: 0.88rem;
+}
+.a11y-demo .row:last-child { border: none; }
+.a11y-demo .toggle {
+  width: 36px; height: 20px;
+  background: var(--gold);
+  border-radius: 999px;
+  position: relative;
+}
+.a11y-demo .toggle::after {
+  content: '';
+  position: absolute;
+  right: 2px; top: 2px;
+  width: 16px; height: 16px;
+  background: #fff;
+  border-radius: 50%;
+}
+.a11y-demo .toggle.off { background: rgba(0,0,0,0.15); }
+.a11y-demo .toggle.off::after { right: auto; left: 2px; }
+
+/* ============================================
+   THE NUMBERS (slide 12 deep)
+   ============================================ */
+.numbers-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 56px 0;
+}
+@media (max-width: 700px) { .numbers-row { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+.number {
+  text-align: center;
+  padding: 24px 8px;
+  border-top: 1px solid rgba(212, 160, 23, 0.25);
+  border-bottom: 1px solid rgba(212, 160, 23, 0.25);
+}
+.number .n {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  color: var(--gold-bright);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.number .l {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent-bright);
-  margin-bottom: 12px;
-  display: block;
-}
-.col-block p {
-  color: rgba(255,255,255,0.85);
-  font-size: 0.95rem;
-  margin: 0;
-  line-height: 1.6;
-}
-.col-block strong {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: 1.15rem;
-  display: block;
-  margin-bottom: 4px;
-  color: #fff;
+  color: rgba(255,255,255,0.6);
 }
 
-.signature-block {
+/* ============================================
+   TIMELINE (slide 13)
+   ============================================ */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  margin: 48px 0;
+  gap: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 14px; left: 0; right: 0;
+  height: 1px;
+  background: var(--hairline);
+  z-index: 0;
+}
+.tl-step {
   text-align: center;
   position: relative;
   z-index: 1;
-  margin-bottom: 80px;
+  padding: 0 12px;
 }
-.signature-block .eyebrow { color: var(--accent-bright); }
-.signature-block .sig-name {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  font-size: clamp(3rem, 6vw, 5rem);
+.tl-step .dot {
+  width: 12px; height: 12px;
+  background: var(--cream);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  margin: 8px auto 16px;
+  position: relative;
+  z-index: 2;
+}
+.tl-step.now .dot { background: var(--gold); }
+.tl-step h5 {
+  font-family: 'Playfair Display', serif;
   font-weight: 500;
-  line-height: 1;
-  color: #fff;
-  margin-bottom: 12px;
-  letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144;
+  font-size: 0.95rem;
+  color: var(--navy);
+  margin-bottom: 6px;
 }
-.signature-block .sig-role {
-  font-size: 0.85rem;
-  letter-spacing: 0.3em;
+.tl-step p {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.tl-step .marker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  font-weight: 500;
+  margin-bottom: 4px;
+}
+@media (max-width: 700px) {
+  .timeline { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { display: none; }
+  .tl-step { text-align: left; padding-left: 32px; position: relative; }
+  .tl-step .dot { position: absolute; left: 0; top: 12px; margin: 0; }
 }
 
-.colophon-bottom {
-  margin-top: 80px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+/* ============================================
+   COPY PROMPTS (slide 14)
+   ============================================ */
+.prompts { display: grid; gap: 12px; }
+.prompt {
+  background: var(--cream-card);
+  border: 1px solid var(--hairline);
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
-  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.prompt:hover { border-color: var(--gold); }
+.prompt-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--navy);
+  flex: 1;
+}
+.prompt-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--hairline-gold);
+  transition: all 0.2s ease;
+}
+.prompt:hover .prompt-copy { background: var(--gold); color: var(--navy); }
+.prompt.copied .prompt-copy::before { content: '✓ COPIADO'; }
+.prompt:not(.copied) .prompt-copy::before { content: 'COPIAR'; }
+
+/* ============================================
+   NEXT STEPS (slide 15)
+   ============================================ */
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+@media (max-width: 700px) { .roadmap { grid-template-columns: 1fr; } }
+.road-item {
+  background: var(--cream);
+  padding: 24px 22px;
+}
+.road-item .when {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.road-item h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.road-item p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ============================================
+   CLOSING (slide 16)
+   ============================================ */
+.closing {
+  text-align: center;
+}
+.closing-mark {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+}
+.closing-name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 7vw, 6rem);
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+}
+.closing-meta {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 56px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(212, 160, 23, 0.25);
+}
+.closing-meta div {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
   color: rgba(255,255,255,0.4);
-  position: relative;
-  z-index: 1;
+}
+.closing-meta div strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--gold-bright);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 4px;
 }
 
-/* =================== REVEAL =================== */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+/* ============================================
+   KEY-NAV HINT
+   ============================================ */
+.keynav-hint {
+  position: fixed;
+  bottom: 28px;
+  left: 32px;
+  z-index: 100;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.reveal.in { opacity: 1; transform: none; }
+.keynav-hint .key {
+  width: 22px; height: 22px;
+  border: 1px solid var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.dark-mode .keynav-hint { color: rgba(255,255,255,0.5); }
+.dark-mode .keynav-hint .key { border-color: rgba(255,255,255,0.5); }
+@media (max-width: 700px) { .keynav-hint { display: none; } }
 
+/* ============================================
+   PRINT
+   ============================================ */
 @media print {
-  .progress, .masthead, .scroll-cue { display: none !important; }
-  body { background: #fff; }
-  .section, .colophon { padding: 40px 0; }
-  .cover { min-height: auto; padding: 60px 0; }
-  .pullq { margin: 40px auto; padding: 24px 0; }
+  html { scroll-snap-type: none; }
+  .slide { min-height: auto; padding: 40px 32px; page-break-after: always; }
+  .slide.deep { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .progress, .counter, .keynav-hint { display: none !important; }
+  .sample, .pillar, .bot, .star-page, .book, .road-item, .a11y-demo { box-shadow: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- ============== READING PROGRESS ============== -->
-<div class="progress" id="progress"></div>
+<!-- ============== PROGRESS ============== -->
+<div class="progress"><div class="progress-fill" id="progress"></div></div>
 
-<!-- ============== STICKY MASTHEAD ============== -->
-<div class="masthead" id="masthead">
-  <div class="mh-left">
-    <span class="mh-issue">Volumen I · Junio 2026</span>
-  </div>
-  <div class="mh-title serif">Posicionamiento AEO · sclavijo.com</div>
-  <div class="mh-right">
-    <span>Por Daniel Muñoz</span>
-  </div>
+<!-- ============== SLIDE COUNTER ============== -->
+<div class="counter" id="counter">
+  <span class="serif" style="font-style:italic">Slide</span>
+  <span class="gold" id="ccurrent">01</span>
+  <span>/</span>
+  <span id="ctotal">16</span>
 </div>
 
-<!-- ============== COVER ============== -->
-<section class="cover">
-  <div class="cover-bg-letters">SC</div>
-  <div class="cover-grid">
+<!-- ============== KEY-NAV HINT ============== -->
+<div class="keynav-hint">
+  <span class="key">↑</span>
+  <span class="key">↓</span>
+  <span>navega</span>
+</div>
+
+
+<!-- ============================================
+     SLIDE 01 — HOOK
+     ============================================ -->
+<section class="slide" data-bg="cream">
+  <span class="ghost" style="font-size: 28vw; bottom: -3vw; right: -2vw;">SC</span>
+
+  <div class="hook">
+    <div class="pretitle r r-1">Volumen I · Junio 2026 · Por Daniel Muñoz</div>
+
+    <h1 class="title xxl serif r r-2">
+      Sandra, le<br>
+      <em>enseñamos</em><br>
+      a la IA quién eres.
+    </h1>
+    <div class="title-underline">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <p class="lead r r-3" style="margin: 32px auto 0; text-align: center;">
+      Un reporte breve, hecho a mano, sobre cómo preparamos sclavijo.com<br>
+      para ser citado por ChatGPT, Claude, Perplexity y Gemini.
+    </p>
+
+    <div class="hook-prompt r r-4">
+      <div class="hook-answer">
+        <em>"Quién es la mejor abogada de inmigración en Miami?"</em>
+      </div>
+      <div class="hook-answer" style="color: var(--gold); margin-top: 12px;">
+        → <span class="typing">Sandra Clavijo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 02 — THE PROBLEM (DEEP NAVY)
+     ============================================ -->
+<section class="slide deep" data-bg="navy">
+  <span class="ghost" style="font-size: 36vw; top: -8vw; right: -4vw; color: var(--gold);">0</span>
+
+  <div class="s-center big-num">
+    <div class="eyebrow r r-1">El punto de partida</div>
+    <h2 class="title xl serif r r-2" style="color: #fff;">
+      Su sitio tenía <em>cero señales</em><br>
+      legibles para la IA.
+    </h2>
+    <div class="title-underline" style="margin: 0 auto;">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <div class="from-to r r-3">
+      0 <span class="arrow">→</span> <em>80<sup style="font-size:0.4em">+</sup></em>
+    </div>
+
+    <p class="body r r-4" style="margin: 0 auto; text-align: center; max-width: 640px;">
+      La IA lee unas etiquetas invisibles llamadas <strong>schemas</strong>. Antes,
+      sclavijo.com casi no tenía ninguna. Para una IA, era indistinguible de un blog
+      o un restaurante. Ahora tiene <strong>más de ochenta entidades estructuradas</strong>,
+      cada una diciéndole a las máquinas: <em>esto es una abogada, con licencia
+      activa, especializada en estos temas.</em>
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 03 — BOSS'S 5-POINT STRATEGY
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
     <div>
-      <div class="cover-issue">Volumen I · Junio 2026</div>
-      <h1>
-        Cómo le<br>
-        <em>enseñamos</em><br>
-        a la IA quién<br>
-        es Sandra.
-      </h1>
-      <p class="cover-deck">
-        Un reporte sobre la implementación de SEO + AEO en sclavijo.com — y por qué importa
-        que ChatGPT, Claude, Perplexity y Gemini la reconozcan como autoridad en derecho
-        migratorio en Miami.
-      </p>
-      <div class="cover-byline">
-        <div class="cover-byline-dash"></div>
-        <div class="info">
-          <div class="label">Implementador</div>
-          <strong>Daniel Muñoz</strong> · Ceibatic
-        </div>
-        <div class="info">
-          <div class="label">Cliente</div>
-          <strong>Sandra Clavijo, Esq.</strong>
-        </div>
+      <div class="eyebrow r r-1">El mandato</div>
+      <h2 class="title lg serif r r-2">
+        Su jefa nos dio<br>
+        <em>cinco puntos.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
       </div>
-    </div>
-    <div class="cover-photo">
-      <img src="https://sclavijo.com/images/sandra/sandra-hero.jpg" alt="Sandra Clavijo, Esq." onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #c8a04c, #efe9dc)'">
-    </div>
-  </div>
-  <div class="scroll-cue">Continúa abajo</div>
-</section>
-
-<!-- ============== LEAD STORY ============== -->
-<section class="section">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">El punto de partida</div>
-      <h2 class="dropline">La pregunta que nadie<br>respondía bien.</h2>
-
-      <p class="drop">
-        Hace algunas semanas hicimos un experimento simple: le preguntamos a ChatGPT, Claude
-        y Perplexity exactamente lo mismo — <em>"¿Quién es la mejor abogada de inmigración
-        en Miami?"</em>. Sandra Clavijo no apareció. Ni una sola vez. No porque no fuera
-        reconocida — su trayectoria de tres décadas habla por sí misma —, sino porque el
-        sitio web no le estaba contando esa historia a las máquinas que hoy responden a
-        miles de personas todos los días.
-      </p>
-
-      <p>
-        El problema no era de SEO clásico. Google sí indexaba el sitio. El problema era
-        más sutil: <strong>las IAs no son buscadores</strong>. Las IAs leen la web,
-        identifican fuentes que reconocen como autoridad, y citan a las que estructuran
-        bien su información. Cuando preguntas a ChatGPT por la mejor abogada de inmigración
-        en Miami, no te lista 10 resultados azules — te da una respuesta directa con dos
-        o tres nombres. Aparecer ahí requiere un conjunto distinto de señales.
-      </p>
-
-      <p>
-        Este reporte documenta cómo construimos esas señales en sclavijo.com.
-      </p>
-
-      <div class="pullq">
-        El sitio ya estaba bien hecho. Lo que faltaba era estructurarlo de forma que las IAs lo entendieran como una fuente confiable.
-        <cite>Daniel Muñoz, Ceibatic</cite>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============== BIG NUMBERS ============== -->
-<section class="section warm">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">Por los números</div>
-      <h2 class="dropline">El trabajo,<br>en seis cifras.</h2>
-    </div>
-
-    <div class="numbers">
-      <div class="num-cell">
-        <div class="n">23</div>
-        <div class="l">Páginas</div>
-      </div>
-      <div class="num-cell">
-        <div class="n">80</div>
-        <div class="l">Schemas JSON-LD</div>
-      </div>
-      <div class="num-cell">
-        <div class="n">14</div>
-        <div class="l">Bots de IA permitidos</div>
-      </div>
-      <div class="num-cell">
-        <div class="n">50</div>
-        <div class="l">FAQs bilingües</div>
-      </div>
-      <div class="num-cell">
-        <div class="n">8</div>
-        <div class="l">AuthorBios visibles</div>
-      </div>
-      <div class="num-cell">
-        <div class="n">2</div>
-        <div class="l">Idiomas (ES · EN)</div>
-      </div>
-    </div>
-
-    <div class="col-narrow">
-      <p>
-        Cada uno de estos números representa decisiones técnicas y editoriales. Ochenta
-        entidades estructuradas significa que ahora cada página del sitio le dice
-        explícitamente a las IAs qué es: una abogada con licencia del Florida Bar, una
-        guía sobre la visa EB-5, un servicio de inmigración de inversión, una persona
-        con tres décadas de experiencia. Antes, las IAs tenían que adivinarlo.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============== BEFORE/AFTER ============== -->
-<section class="section">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">Antes y después</div>
-      <h2 class="dropline">El contraste,<br>en lo concreto.</h2>
-      <p class="lead">
-        Para entender el alcance del trabajo, este es el estado del sitio antes de la
-        intervención y después de los seis commits desplegados en producción.
+      <p class="body r r-3" style="margin-top: 28px;">
+        Una estrategia clara, escrita por alguien que entiende posicionamiento en IA.
+        La seguimos al pie de la letra. Tres puntos se ejecutaron en el código.
+        Dos requieren su acción humana — y están listos para suceder cuando lleguen.
       </p>
     </div>
 
-    <div class="two-col">
-      <div class="col before">
-        <h3>Antes — el silencio</h3>
-        <ul>
-          <li>Sin datos estructurados (JSON-LD) que las IAs puedan leer</li>
-          <li>robots.txt sin permisos explícitos para crawlers de IA</li>
-          <li>17 páginas con metadata duplicada — todo igual</li>
-          <li>Sin FAQs estructurados en páginas de servicios</li>
-          <li>Sin biografía visible que reforzara autoridad</li>
-          <li>Sin manifiesto llms.txt para asistentes de IA</li>
-          <li>Sin página específica para "Best immigration lawyer in Miami"</li>
-          <li>Schema Person genérico sin credenciales detalladas</li>
-        </ul>
-      </div>
-
-      <div class="col after">
-        <h3>Después — la voz</h3>
-        <ul>
-          <li>~80 entidades Schema.org estructuradas en 23 páginas</li>
-          <li>14 bots de IA permitidos: GPTBot, ClaudeBot, PerplexityBot, etc.</li>
-          <li>Metadata única + canonical + hreflang en cada página</li>
-          <li>50+ FAQs bilingües (ES + EN) con FAQPage schema</li>
-          <li>AuthorBio visible de Sandra al final de cada artículo</li>
-          <li>llms.txt como mapa para que las IAs descubran el sitio</li>
-          <li>Página estrella optimizada para la query exacta</li>
-          <li>Person schema con 23 áreas, 12 skills, AILA + Florida Bar</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== TIMELINE EDITORIAL ============== -->
-<section class="section dark">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">La cronología</div>
-      <h2 class="dropline">Seis<br>movimientos.</h2>
-      <p class="lead">
-        Cada fase fue una decisión deliberada. Lo que sigue es el orden y la lógica detrás
-        de cada movimiento.
-      </p>
-    </div>
-
-    <div class="tl-list">
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          19 Mayo · Commit e0bc50e
-          <span class="phase">I</span>
-        </div>
-        <div>
-          <div class="tl-title">Fundación técnica</div>
-          <div class="tl-body">
-            Construimos la librería completa de schemas Schema.org. Cada tipo de página
-            requiere un tipo de marca: Organization, Attorney (subtipo de LegalService),
-            Person para Sandra, Service por cada visa, Article para las guías, FAQPage,
-            BreadcrumbList. Configuramos robots.txt con catorce bots de IA permitidos
-            explícitamente. Expandimos el sitemap. Creamos llms.txt — un manifiesto
-            emergente que asistentes como Perplexity ya empiezan a consultar.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">src/lib/schema</span>
-            <span class="tl-tag">robots.ts</span>
-            <span class="tl-tag">sitemap.ts</span>
-            <span class="tl-tag">llms.txt</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          19 Mayo · Commit 3791364
-          <span class="phase">II</span>
-        </div>
-        <div>
-          <div class="tl-title">Accesibilidad ADA · WCAG 2.1 AA</div>
-          <div class="tl-body">
-            En paralelo, una pieza que protege legalmente a la firma: un widget de
-            accesibilidad completo (tamaño de texto, contraste, fuente para dislexia,
-            lectura en voz alta, guía de lectura, cursor grande, pausar animaciones)
-            y una página pública de declaración legal. Sin costos mensuales, sin
-            terceros, totalmente propio.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">AccessibilityWidget</span>
-            <span class="tl-tag">SkipLink</span>
-            <span class="tl-tag">/accesibilidad</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          19 Mayo · Commit da4e255
-          <span class="phase">III</span>
-        </div>
-        <div>
-          <div class="tl-title">FAQs en las cinco visas más buscadas</div>
-          <div class="tl-body">
-            Cincuenta preguntas reales, bilingües, sobre EB-5, EB-2 NIW, O-1, EB-1A y L-1.
-            Las preguntas que los clientes hacen, no las que los SEO promedio escriben para
-            rellenar. Cada una se renderiza dos veces: una vez como acordeón visible para
-            el lector, otra como FAQPage schema para las IAs. El texto coincide
-            exactamente — porque Google penaliza cuando no.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">faq.ts × 5</span>
-            <span class="tl-tag">layout.tsx × 5</span>
-            <span class="tl-tag">Faq.tsx</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          3 Junio · Commit ddf3ff6
-          <span class="phase">IV</span>
-        </div>
-        <div>
-          <div class="tl-title">Cobertura total · diecisiete páginas</div>
-          <div class="tl-body">
-            Cada visa restante (E-1, E-2, EB-1B, EB-3, P, B-1/B-2), cada guía de recursos,
-            las páginas de índice y contacto. Article schema en las guías. ContactPage en
-            la página de contacto. CollectionPage en los índices. Metadata única por
-            página — el detalle que separa un sitio profesional de uno improvisado.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">17 layout.tsx</span>
-            <span class="tl-tag">Article</span>
-            <span class="tl-tag">ContactPage</span>
-            <span class="tl-tag">CollectionPage</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          3 Junio · Commit ddf3ff6
-          <span class="phase">V</span>
-        </div>
-        <div>
-          <div class="tl-title">La página estrella</div>
-          <div class="tl-body">
-            La estrategia que la jefa pidió, hecha realidad: una landing dedicada a la
-            pregunta exacta. H1 textual, seis razones objetivas (no marketing — datos),
-            seis sub-secciones "Best X attorney" por especialidad, cita editorial de Sandra,
-            el texto de autoridad que la jefa proveyó, FAQ con seis preguntas, AuthorBio,
-            CTA múltiple. Existe en español e inglés.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">/best-immigration-lawyer-miami</span>
-            <span class="tl-tag">Article + FAQPage</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-row">
-        <div class="tl-marker">
-          3 Junio · Commit d35f782
-          <span class="phase">VI</span>
-        </div>
-        <div>
-          <div class="tl-title">Gobernanza · para que esto perdure</div>
-          <div class="tl-body">
-            Tres documentos que aseguran que cualquier página nueva que se cree en el
-            futuro mantenga este estándar: el manual de reglas (AEO_SEO_GUIDELINES), la
-            guía para futuras versiones de Claude (CLAUDE.md), y un reporte técnico
-            detallado. El trabajo no es solo el código que se desplegó — es la decisión
-            de que el sitio siga siendo así.
-          </div>
-          <div class="tl-tags">
-            <span class="tl-tag">AEO_SEO_GUIDELINES.md</span>
-            <span class="tl-tag">CLAUDE.md</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============== BOSS STRATEGY ============== -->
-<section class="section">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">El mandato</div>
-      <h2 class="dropline">Cinco puntos.<br>Cinco respuestas.</h2>
-      <p class="lead">
-        La jefa de Sandra envió una estrategia clara con cinco puntos. Cada uno se mapeó
-        a una implementación técnica concreta. Tres se ejecutaron desde el código. Dos
-        son acciones humanas que están listas para suceder cuando lleguen.
-      </p>
-    </div>
-
-    <div class="strategy-grid">
-
-      <div class="strategy-cell">
-        <div class="sn">01</div>
+    <div class="pillars r r-4">
+      <div class="pillar">
+        <span class="num">i.</span>
         <h4>Posicionar la pregunta exacta</h4>
-        <p>
-          Página estrella creada con H1 textual y seis razones verificables. Schema Article
-          + FAQPage + BreadcrumbList. Existe en dos idiomas.
-        </p>
-        <span class="status done">✓ Hecho</span>
+        <p>Página estrella con H1 textual, seis razones objetivas, FAQ con seis preguntas. Existe en español e inglés.</p>
+        <span class="status done">✓ Implementado</span>
       </div>
-
-      <div class="strategy-cell">
-        <div class="sn">02</div>
-        <h4>Multiplicar reseñas de Google</h4>
-        <p>
-          El schema acepta aggregateRating preparado para cuando Sandra acumule reviews
-          reales. No fabricamos nada — el Florida Bar regula esto y Google penaliza.
-        </p>
-        <span class="status offsite">Off-site · Sandra</span>
+      <div class="pillar">
+        <span class="num">ii.</span>
+        <h4>Multiplicar reseñas en Google</h4>
+        <p>El schema acepta aggregateRating cuando lleguen reseñas reales. No fabricamos — Florida Bar regula esto.</p>
+        <span class="status offsite">Acción humana</span>
       </div>
-
-      <div class="strategy-cell">
-        <div class="sn">03</div>
+      <div class="pillar">
+        <span class="num">iii.</span>
         <h4>Contenido "best X lawyer"</h4>
-        <p>
-          Seis sub-secciones dentro de la página estrella, una por cada visa principal,
-          más FAQs específicos por servicio.
-        </p>
-        <span class="status done">✓ Hecho</span>
+        <p>Seis sub-secciones por especialidad dentro de la página estrella. Más FAQs específicos en cada visa.</p>
+        <span class="status done">✓ Implementado</span>
       </div>
-
-      <div class="strategy-cell">
-        <div class="sn">04</div>
+      <div class="pillar">
+        <span class="num">iv.</span>
         <h4>Perfil de autoridad consistente</h4>
-        <p>
-          Schema Person enriquecido con 23 áreas y 12 skills. AuthorBio visible en 8 páginas.
-          El texto exacto provisto por la jefa, vivo en producción.
-        </p>
-        <span class="status done">✓ Hecho</span>
+        <p>Schema Person enriquecido con 23 áreas y 12 skills. AuthorBio visible en 8 páginas. Florida Bar + AILA.</p>
+        <span class="status done">✓ Implementado</span>
       </div>
-
-      <div class="strategy-cell">
-        <div class="sn">05</div>
+      <div class="pillar">
+        <span class="num">v.</span>
         <h4>Menciones externas</h4>
-        <p>
-          Schema sameAs preparado para agregar perfiles externos cuando lleguen menciones
-          en medios, podcasts y directorios profesionales.
-        </p>
-        <span class="status offsite">Off-site · equipo</span>
+        <p>Schema sameAs preparado para agregar perfiles externos cuando lleguen menciones en medios y directorios.</p>
+        <span class="status offsite">Acción humana</span>
       </div>
-
-    </div>
-
-    <div class="pullq">
-      "Sandra Clavijo is a Miami-based immigration attorney recognized for her work in EB-5 investor visas, E-2 visas, L-1A executive transfers, EB-1 extraordinary ability petitions, and business immigration."
-      <cite>Texto provisto por la jefa, vivo en producción</cite>
     </div>
   </div>
 </section>
 
-<!-- ============== STAR PAGE FEATURE ============== -->
-<section class="section warm">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">La página estrella</div>
-      <h2 class="dropline">Cuando ChatGPT<br>te haga la pregunta,<br>esta es la respuesta.</h2>
-      <p>
-        URL: <strong>sclavijo.com/en/best-immigration-lawyer-miami</strong>.
-        Esta es la página que existe específicamente para ser citada como fuente cuando
-        alguien le pregunte a un motor de IA por la mejor abogada de inmigración en Miami.
-        Su estructura está optimizada para ser entendida tanto por humanos como por máquinas.
-      </p>
-    </div>
 
-    <div class="feature-split">
-      <div class="feature-img">
-        <img src="https://sclavijo.com/images/sandra/sandra-elegant.jpg" alt="Sandra Clavijo" onerror="this.style.display='none'; this.parentElement.style.background='var(--paper-dark)'">
+<!-- ============================================
+     SLIDE 04 — JSON-LD SCHEMA
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase I · La cédula</div>
+      <h2 class="title lg serif r r-2">
+        Le construimos<br>
+        <em>una identidad</em><br>
+        legible por máquinas.
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
       </div>
-      <div class="feature-text">
-        <h3>Una respuesta directa,<br>no una venta.</h3>
+      <div class="body r r-3" style="margin-top: 28px;">
         <p>
-          El H1 de la página es la pregunta literal. El primer párrafo la responde sin
-          rodeos: con más de treinta años de experiencia, miembro activa del Florida Bar
-          y de AILA, especializada en visas de inversión y talento, atendiendo a clientes
-          latinoamericanos en español e inglés.
+          Los schemas Schema.org son la cédula de su firma para los motores de IA.
+          Construimos <strong>siete tipos</strong> — Organization, Attorney, Person,
+          Service, Article, FAQPage y BreadcrumbList — usados en combinación a lo
+          largo de las 23 páginas del sitio.
         </p>
-        <p>
-          Debajo, seis razones objetivas. Después, una cita editorial de Sandra. Después,
-          el texto de autoridad que la jefa redactó textualmente. Después, seis preguntas
-          y respuestas estructuradas como FAQPage. Y al final, la bio visible de la
-          autora — que coincide exactamente con el schema Person enterrado en el HTML.
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--muted); font-size: 0.95rem;">
+          → A la derecha: la cédula de Sandra Clavijo como la lee ChatGPT hoy.
         </p>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- ============== EXPECTATIONS ============== -->
-<section class="section">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">Las expectativas</div>
-      <h2 class="dropline">Honesta<br>realidad temporal.</h2>
-
-      <p>
-        <strong>Ningún proveedor en el mundo puede garantizar</strong> que sclavijo.com
-        aparezca de primero cuando alguien le pregunte a ChatGPT por la mejor abogada de
-        inmigración en Miami. Eso depende de algoritmos que ni Google ni OpenAI ni
-        Anthropic exponen públicamente. Lo que sí hicimos es maximizar significativamente
-        las probabilidades. Esto es lo que se puede esperar:
-      </p>
-
-      <div class="editorial-list">
-        <div class="el-item">
-          <div class="el-num">i</div>
-          <div>
-            <h4>Inmediato — hoy</h4>
-            <p>Google y los crawlers de IA empiezan a indexar las nuevas páginas y schemas. Recomendamos hacer submit manual del sitemap en Google Search Console para acelerar.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">ii</div>
-          <div>
-            <h4>Dos a cuatro semanas</h4>
-            <p>Los schemas validados aparecen como "rich results" en Google Search Console. Empieza a llegar tráfico orgánico a las nuevas guías de recursos.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">iii</div>
-          <div>
-            <h4>Cuatro a ocho semanas</h4>
-            <p>Primeras citaciones en Perplexity y Google AI Overviews, que son los motores más rápidos en reconocer fuentes nuevas y estructuradas.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">iv</div>
-          <div>
-            <h4>Ocho a doce semanas</h4>
-            <p>Citas medibles en ChatGPT y Claude. Estos modelos actualizan sus fuentes con más frecuencia desde 2025, pero son más lentos que Perplexity.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">v</div>
-          <div>
-            <h4>Tres a seis meses</h4>
-            <p>Tráfico medible de referrers de IA en Google Analytics. Cuando aparezca chatgpt.com, perplexity.ai o claude.ai como referrer, será la señal más clara.</p>
-          </div>
-        </div>
-      </div>
-
+    <div class="sample r r-4">
+      <div class="sample-tab">src/lib/schema/person.ts</div>
+      <pre class="sample-body">{
+  <span class="k">"@type"</span>: <span class="s">"Person"</span>,
+  <span class="k">"name"</span>: <span class="s">"Sandra Clavijo"</span>,
+  <span class="k">"honorificSuffix"</span>: <span class="s">"Esq."</span>,
+  <span class="k">"jobTitle"</span>: <span class="s">"Immigration Attorney"</span>,
+  <span class="k">"hasOccupation"</span>: {
+    <span class="k">"@type"</span>: <span class="s">"Occupation"</span>,
+    <span class="k">"occupationLocation"</span>: <span class="s">"Miami, FL"</span>,
+    <span class="k">"skills"</span>: [
+      <span class="s">"EB-5 Investor Visa Petitions"</span>,
+      <span class="s">"E-2 Treaty Investor Petitions"</span>,
+      <span class="s">"L-1A Executive Transfers"</span>,
+      <span class="s">"EB-1A Extraordinary Ability"</span>,
+      <span class="s">"O-1 Talent Visas"</span>,
+      <span class="s">"Source-of-Funds Documentation"</span>
+    ]
+  },
+  <span class="k">"memberOf"</span>: [
+    <span class="s">"The Florida Bar"</span>,
+    <span class="s">"American Immigration Lawyers Association"</span>
+  ],
+  <span class="k">"knowsAbout"</span>: [ <span class="c">/* 23 áreas específicas */</span> ]
+}</pre>
     </div>
   </div>
 </section>
 
-<!-- ============== WHAT'S NEXT ============== -->
-<section class="section dark">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">El siguiente capítulo</div>
-      <h2 class="dropline">Lo que queda<br>por hacer.</h2>
-      <p class="lead">
-        El sitio ya está al cien por ciento. Estas son acciones humanas — fuera del
-        código — que amplifican enormemente el impacto AEO. Las prioridades:
-      </p>
 
-      <div class="editorial-list">
-        <div class="el-item">
-          <div class="el-num">i</div>
-          <div>
-            <h4>Reseñas verificadas en Google</h4>
-            <p style="color: rgba(255,255,255,0.7);">Pedir a clientes recientes que dejen reviews en Google Business, sugiriendo que mencionen frases naturales como "Best immigration lawyer in Miami" o "Sandra Clavijo helped me with my visa". Esta es la palanca más fuerte para búsquedas locales.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">ii</div>
-          <div>
-            <h4>Verificar perfiles oficiales</h4>
-            <p style="color: rgba(255,255,255,0.7);">Asegurar que el perfil en floridabar.org y la membresía en aila.org estén completos, actualizados y visibles públicamente.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">iii</div>
-          <div>
-            <h4>Presencia en directorios y medios</h4>
-            <p style="color: rgba(255,255,255,0.7);">Avvo, LinkedIn con publicaciones regulares, podcasts hispanos, cámaras de comercio binacionales. Cada mención externa fortalece la autoridad de la entidad "Sandra Clavijo" en el grafo de conocimiento de las IAs.</p>
-          </div>
+<!-- ============================================
+     SLIDE 05 — 16 AI BOTS
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase I · Las puertas abiertas</div>
+      <h2 class="title lg serif r r-2">
+        Invitamos a<br>
+        <em>dieciséis robots</em><br>
+        a entrar.
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Muchos sitios bloquean a los crawlers de IA sin saberlo. Nosotros editamos
+          el <code class="mono" style="font-size:0.9em; background: var(--cream-card); padding: 2px 6px;">robots.txt</code>
+          para permitir explícitamente los dieciséis bots que alimentan a ChatGPT,
+          Claude, Perplexity, Gemini y los demás.
+        </p>
+        <p>
+          También publicamos <strong>llms.txt</strong> — un manifiesto emergente
+          que asistentes como Perplexity ya empiezan a consultar.
+        </p>
+      </div>
+    </div>
+
+    <div class="bots r r-4">
+      <div class="bot">GPTBot <span class="vendor">OpenAI</span></div>
+      <div class="bot">ChatGPT-User <span class="vendor">OpenAI</span></div>
+      <div class="bot">OAI-SearchBot <span class="vendor">OpenAI</span></div>
+      <div class="bot">ClaudeBot <span class="vendor">Anthropic</span></div>
+      <div class="bot">Claude-Web <span class="vendor">Anthropic</span></div>
+      <div class="bot">anthropic-ai <span class="vendor">Anthropic</span></div>
+      <div class="bot">PerplexityBot <span class="vendor">Perplexity</span></div>
+      <div class="bot">Perplexity-User <span class="vendor">Perplexity</span></div>
+      <div class="bot">Google-Extended <span class="vendor">Gemini</span></div>
+      <div class="bot">Applebot-Extended <span class="vendor">Apple Int.</span></div>
+      <div class="bot">CCBot <span class="vendor">Common Crawl</span></div>
+      <div class="bot">Bytespider <span class="vendor">ByteDance</span></div>
+      <div class="bot">Amazonbot <span class="vendor">Amazon</span></div>
+      <div class="bot">cohere-ai <span class="vendor">Cohere</span></div>
+      <div class="bot">DiffbotBot <span class="vendor">Mistral</span></div>
+      <div class="bot">YouBot <span class="vendor">You.com</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 06 — FAQS
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase II · Preguntas reales</div>
+      <h2 class="title lg serif r r-2">
+        Cincuenta preguntas.<br>
+        <em>Cincuenta respuestas.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Las preguntas que sus clientes realmente hacen, no las que los SEO genéricos
+          escriben para rellenar. Cincuenta Q&amp;A bilingües (ES + EN) en sus cinco
+          visas más buscadas — EB-5, EB-2 NIW, O-1, EB-1A, L-1.
+        </p>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--muted); font-size: 0.95rem;">
+          Cuando alguien le pregunta a ChatGPT cuánto cuesta una EB-5, ahora cita
+          su respuesta — palabra por palabra.
+        </p>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 18px;">
+          → Haga clic en cualquier pregunta para ver la respuesta exacta que vive en sclavijo.com.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq r r-4">
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cuál es la inversión mínima para la EB-5 en 2026?</div>
+        <div class="faq-a">$800,000 USD invertidos en un TEA (Targeted Employment Area), o $1,050,000 USD para inversión estándar fuera de un TEA. Estos montos fueron establecidos por el EB-5 Reform and Integrity Act de 2022 y se ajustan cada 5 años.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cuánto tarda el proceso EB-5?</div>
+        <div class="faq-a">El proceso completo desde el I-526E hasta la Green Card permanente toma entre 3 y 5 años para la mayoría de nacionales. Primero se obtiene residencia condicional, y la condición se remueve 2 años después con el formulario I-829.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿La EB-5 incluye a mi cónyuge e hijos?</div>
+        <div class="faq-a">Sí. La EB-5 incluye al inversionista principal, su cónyuge y todos los hijos solteros menores de 21. Todos obtienen Green Card y pueden vivir, trabajar y estudiar en EE.UU. sin restricciones.</div>
+      </div>
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Necesito hablar inglés para aplicar a la EB-5?</div>
+        <div class="faq-a">No. A diferencia de otras visas, la EB-5 no exige conocimientos de inglés ni un nivel educativo específico. El requisito principal es demostrar el origen legal de los fondos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 07 — 23 PAGES, BOTH LANGUAGES
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase III · Cobertura</div>
+      <h2 class="title lg serif r r-2">
+        Veintitrés páginas.<br>
+        <em>Dos idiomas.</em><br>
+        Sin vacíos.
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Cada servicio, cada guía, cada página de índice — cubierta en español
+          <em>y</em> en inglés. Metadata única por página. Canonical URL. Hreflang
+          correcto. El sitemap creció de dieciséis entradas a cincuenta.
+        </p>
+      </div>
+    </div>
+
+    <div class="url-tree r r-4">
+      <div class="h">Principales (6)</div>
+      <div class="url"><span class="l">ES</span>/es/</div>
+      <div class="url"><span class="l">EN</span>/en/</div>
+      <div class="url"><span class="l">ES</span>/es/sobre-mi</div>
+      <div class="url"><span class="l">EN</span>/en/sobre-mi</div>
+      <div class="url"><span class="l">ES</span>/es/contacto</div>
+      <div class="url"><span class="l">EN</span>/en/contacto</div>
+
+      <div class="h">Servicios — Visas (11)</div>
+      <div class="url"><span class="l">×2</span>visa-eb5</div>
+      <div class="url"><span class="l">×2</span>visa-eb2-niw</div>
+      <div class="url"><span class="l">×2</span>visa-eb1a</div>
+      <div class="url"><span class="l">×2</span>visa-eb1b</div>
+      <div class="url"><span class="l">×2</span>visa-eb3</div>
+      <div class="url"><span class="l">×2</span>visa-o1</div>
+      <div class="url"><span class="l">×2</span>visa-l1</div>
+      <div class="url"><span class="l">×2</span>visa-e1</div>
+      <div class="url"><span class="l">×2</span>visa-e2</div>
+      <div class="url"><span class="l">×2</span>visa-p</div>
+      <div class="url"><span class="l">×2</span>visa-turismo</div>
+
+      <div class="h">Guías largas (7)</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-eb5</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-eb2-niw</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-o1</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-eb1a</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-eb1b</div>
+      <div class="url"><span class="l">×2</span>/recursos/visa-l1</div>
+      <div class="url"><span class="l">×2</span>/recursos/derechos-ante-ice</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 08 — AUTHORITY (DEEP NAVY)
+     ============================================ -->
+<section class="slide deep" data-bg="navy">
+  <div class="s-center authority">
+    <div class="eyebrow r r-1">Fase IV · Autoridad</div>
+    <h2 class="title xl serif r r-2" style="color: #fff;">
+      Le hicimos saber a la IA<br>
+      que usted es <em>la experta.</em>
+    </h2>
+    <div class="title-underline" style="margin: 0 auto 56px;">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <div class="authority-portrait r r-3">
+      <img src="https://sclavijo.com/images/sandra/sandra-hero.jpg"
+           alt="Sandra Clavijo, Esq."
+           onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #d4a017, #0a2e5c)'">
+    </div>
+
+    <p class="body r r-4" style="margin: 0 auto 40px; text-align: center; max-width: 640px;">
+      Veintitrés áreas de conocimiento específicas. Doce skills profesionales.
+      Membresías activas en el <strong>Florida Bar</strong> y <strong>AILA</strong>.
+      Todo machine-readable, listo para que las IAs reconozcan a Sandra como
+      autoridad cuando responden preguntas sobre inmigración.
+    </p>
+
+    <div class="tags-cloud r r-5">
+      <div class="tag">EB-5 Investor Visa</div>
+      <div class="tag">EB-2 NIW</div>
+      <div class="tag">EB-1A Extraordinary Ability</div>
+      <div class="tag">EB-1B Outstanding Researcher</div>
+      <div class="tag">O-1 Talent Visa</div>
+      <div class="tag">L-1A Executive Transfer</div>
+      <div class="tag">L-1B Specialized Knowledge</div>
+      <div class="tag">E-2 Treaty Investor</div>
+      <div class="tag">E-1 Treaty Trader</div>
+      <div class="tag">Matter of Dhanasar</div>
+      <div class="tag">I-526E / I-829</div>
+      <div class="tag">I-140 / I-485</div>
+      <div class="tag">Source-of-Funds</div>
+      <div class="tag">Consular Processing</div>
+      <div class="tag">Adjustment of Status</div>
+      <div class="tag">Family-Based Immigration</div>
+      <div class="tag">Naturalization</div>
+      <div class="tag">USCIS Procedures</div>
+      <div class="tag">Florida Bar Active</div>
+      <div class="tag">AILA Member</div>
+      <div class="tag">Bilingual ES · EN</div>
+      <div class="tag">30+ Years Experience</div>
+      <div class="tag">Miami, Florida</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 09 — STAR PAGE
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase V · La página estrella</div>
+      <h2 class="title lg serif r r-2">
+        Una página<br>
+        para ganar la<br>
+        <em>pregunta #1.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Construimos una landing dedicada que responde literalmente la pregunta
+          más buscada en Miami: <em>"¿Quién es la mejor abogada de inmigración?"</em>
+        </p>
+        <p>
+          Su H1 es esa pregunta exacta. Su primer párrafo la responde sin rodeos.
+          Está optimizada para ser citada palabra por palabra por las IAs.
+          Existe en ES y EN.
+        </p>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); margin-top: 18px; letter-spacing: 0.05em;">
+          → sclavijo.com/en/best-immigration-lawyer-miami
+        </p>
+      </div>
+    </div>
+
+    <div class="star-page r r-4">
+      <div class="eyebrow" style="margin-bottom: 14px;">Una de las principales abogadas de Miami</div>
+      <h3 class="star-h1">
+        Who Is the Best<br>
+        <em>Immigration Lawyer</em><br>
+        in Miami?
+      </h3>
+      <p class="star-lead">
+        Sandra Clavijo, Esq., is a Miami-based immigration attorney with over 30
+        years of experience, recognized for her work in EB-5 investor visas, E-2
+        treaty visas, L-1A executive transfers, EB-1 extraordinary ability
+        petitions and O-1 talent visas.
+      </p>
+      <div class="star-reason">
+        <div class="n">i.</div>
+        <div>
+          <h4>Over 30 years of experience</h4>
+          <p>Three decades representing cases before USCIS, consulates, and immigration courts. Proven through legal changes from NAFTA to the post-2024 era.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== INTEGRITY ============== -->
-<section class="section">
-  <div class="container">
-    <div class="col-narrow">
-      <div class="eyebrow">Integridad</div>
-      <h2 class="dropline">Lo que<br>no hicimos.</h2>
-      <p class="lead">
-        El Florida Bar regula estrictamente la publicidad legal. Google penaliza E-E-A-T
-        cuando detecta engaño. Estas son las líneas que deliberadamente no cruzamos —
-        y por qué importa.
-      </p>
 
-      <div class="editorial-list">
-        <div class="el-item">
-          <div class="el-num">·</div>
-          <div>
-            <h4>No fabricamos reseñas ni testimonios</h4>
-            <p>El schema acepta aggregateRating solo cuando haya reviews reales en Google Business. Inventarlos sería motivo de penalización masiva por parte de Google y posible queja ante el Florida Bar.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">·</div>
-          <div>
-            <h4>No inventamos credenciales</h4>
-            <p>Solo incluimos lo verificable: Florida Bar y AILA. Ambos chequeables públicamente. Inventar diplomas o años habría sido un riesgo legal real para Sandra.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">·</div>
-          <div>
-            <h4>No exageramos cifras</h4>
-            <p>"Treinta años" es real y documentable. Nunca afirmamos "quinientos casos ganados" sin documentación verificable. La precisión es defensa.</p>
-          </div>
-        </div>
-        <div class="el-item">
-          <div class="el-num">·</div>
-          <div>
-            <h4>No usamos comparativos absolutos</h4>
-            <p>Evitamos "#1 immigration lawyer in Miami". Usamos "una de las principales" — defendible, precisa, no comparativa absoluta. Lo primero es opinable; lo segundo, documentable.</p>
-          </div>
-        </div>
+<!-- ============================================
+     SLIDE 10 — GOVERNANCE
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Fase VI · Para que perdure</div>
+      <h2 class="title lg serif r r-2">
+        Reglas escritas<br>
+        para que el sitio<br>
+        <em>siga siendo así.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
       </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Dos documentos vivos en el repositorio. Cualquier desarrollador — humano o
+          IA — que toque el sitio en el futuro <strong>tiene que cumplirlos</strong>.
+        </p>
+        <p>
+          La calidad ya no depende de la memoria de nadie: está sistematizada.
+        </p>
+      </div>
+    </div>
 
-      <p>
-        Esta integridad es lo que protege a Sandra a largo plazo. Es también lo que la
-        diferencia de competidores que sí inflan sus sitios y eventualmente pagan el precio.
-      </p>
-
+    <div class="books r r-4">
+      <div class="book">
+        <div class="label">Documento I</div>
+        <h4>AEO_SEO_GUIDELINES</h4>
+        <ul>
+          <li>Toda página nueva debe tener layout.tsx server con generateMetadata + JSON-LD</li>
+          <li>JSON-LD nunca dentro de un componente 'use client'</li>
+          <li>FAQ visible y schema deben compartir el mismo array de items</li>
+          <li>Agregar al sitemap.ts y al llms.txt cada vez</li>
+        </ul>
+      </div>
+      <div class="book">
+        <div class="label">Documento II</div>
+        <h4>CLAUDE.md</h4>
+        <ul>
+          <li>Nunca fabricar reseñas, ratings, credenciales ni testimonios</li>
+          <li>Usar siempre los constants de src/lib/seo/ — no hardcodear</li>
+          <li>Comprimir imágenes (max 1600px, JPG q85) antes de commit</li>
+          <li>Mantener AccessibilityWidget — requerido por ADA Title III</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============== COLOPHON ============== -->
-<footer class="colophon">
-  <div class="colophon-mark">dm</div>
-  <div class="container">
-    <div class="signature-block">
-      <div class="eyebrow">Implementador</div>
-      <div class="sig-name">Daniel Muñoz</div>
-      <div class="sig-role">Ceibatic · Junio 2026</div>
+
+<!-- ============================================
+     SLIDE 11 — ADA ACCESSIBILITY (BONUS)
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Bonus · Cumplimiento ADA</div>
+      <h2 class="title lg serif r r-2">
+        Y de paso —<br>
+        protegimos a la firma<br>
+        de <em>demandas ADA.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Las demandas por incumplimiento de la <strong>ADA Título III</strong> son
+          una industria en Florida. Construimos un widget de accesibilidad propio,
+          conforme con WCAG 2.1 AA, sin costos mensuales ni dependencias de terceros.
+        </p>
+        <p>
+          Incluye tamaño de texto, alto contraste, fuente para dislexia, lectura en
+          voz alta, guía de lectura, cursor grande y pausar animaciones. Más una
+          página pública de <strong>declaración legal</strong>.
+        </p>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); margin-top: 18px; letter-spacing: 0.05em;">
+          → sclavijo.com/accesibilidad
+        </p>
+      </div>
     </div>
 
-    <div class="colophon-grid">
-      <div class="col-block">
-        <span class="label">Cliente</span>
-        <strong>Sandra Clavijo, Esq.</strong>
-        <p>Immigration Attorney<br>Miami, Florida</p>
+    <div class="r r-4" style="display: flex; justify-content: center;">
+      <div class="a11y-demo">
+        <div class="head">
+          Accessibility
+          <small>WCAG 2.1 AA · ADA</small>
+        </div>
+        <div class="row"><span>Tamaño del texto</span><span class="serif" style="color:var(--gold); font-style:italic;">A++</span></div>
+        <div class="row"><span>Alto contraste</span><div class="toggle"></div></div>
+        <div class="row"><span>Fuente para dislexia</span><div class="toggle"></div></div>
+        <div class="row"><span>Guía de lectura</span><div class="toggle off"></div></div>
+        <div class="row"><span>Pausar animaciones</span><div class="toggle"></div></div>
+        <div class="row"><span>Cursor grande</span><div class="toggle off"></div></div>
+        <div class="row"><span>Leer página en voz alta</span><div class="toggle off"></div></div>
       </div>
-      <div class="col-block">
-        <span class="label">Sitio</span>
-        <strong>sclavijo.com</strong>
-        <p>Next.js 16<br>Bilingüe ES + EN</p>
-      </div>
-      <div class="col-block">
-        <span class="label">Proyecto</span>
-        <strong>SEO + AEO completo</strong>
-        <p>23 páginas optimizadas<br>~80 schemas JSON-LD</p>
-      </div>
-      <div class="col-block">
-        <span class="label">Documentos</span>
-        <strong>Tres anexos técnicos</strong>
-        <p>AEO_SEO_GUIDELINES.md<br>AEO_CHANGE_REPORT.md<br>CLAUDE.md</p>
-      </div>
-    </div>
-
-    <div class="colophon-bottom">
-      <div>© 2026 Daniel Muñoz · Ceibatic. Reporte preparado para Sandra Clavijo Immigration Attorney.</div>
-      <div>Junio 3, 2026 · Volumen I</div>
     </div>
   </div>
-</footer>
+</section>
+
+
+<!-- ============================================
+     SLIDE 12 — THE NUMBERS (DEEP)
+     ============================================ -->
+<section class="slide deep" data-bg="navy">
+  <span class="ghost" style="font-size: 32vw; bottom: -8vw; left: -4vw; color: var(--gold);">VI</span>
+
+  <div class="s-center">
+    <div class="eyebrow r r-1">Los recibos</div>
+    <h2 class="title xl serif r r-2" style="color: #fff;">
+      Seis números<br>
+      <em>de lo que se hizo.</em>
+    </h2>
+    <div class="title-underline" style="margin: 0 auto;">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <div class="numbers-row r r-3">
+      <div class="number"><div class="n">23</div><div class="l">Páginas</div></div>
+      <div class="number"><div class="n">80<sup style="font-size:0.5em">+</sup></div><div class="l">Schemas JSON-LD</div></div>
+      <div class="number"><div class="n">16</div><div class="l">Bots de IA permitidos</div></div>
+      <div class="number"><div class="n">50<sup style="font-size:0.5em">+</sup></div><div class="l">FAQs bilingües</div></div>
+      <div class="number"><div class="n">8</div><div class="l">AuthorBios visibles</div></div>
+      <div class="number"><div class="n">2</div><div class="l">Idiomas (ES · EN)</div></div>
+    </div>
+
+    <p class="body r r-4" style="margin: 16px auto 0; text-align: center; max-width: 560px;">
+      Cada número es una decisión deliberada. Ochenta entidades estructuradas significa
+      que cada página del sitio le dice <em>explícitamente</em> a las IAs qué es.
+      Antes tenían que adivinarlo.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 13 — TIMELINE
+     ============================================ -->
+<section class="slide">
+  <div class="s-center">
+    <div class="eyebrow r r-1">Honestidad sobre los tiempos</div>
+    <h2 class="title lg serif r r-2" style="text-align: center;">
+      ¿Cuándo veremos<br>
+      <em>los resultados?</em>
+    </h2>
+    <div class="title-underline" style="margin: 0 auto 48px;">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <p class="lead r r-3" style="margin: 0 auto 32px; text-align: center;">
+      Ningún proveedor puede garantizar la cita en IA. Pero esto es lo que es
+      razonable esperar, semana a semana.
+    </p>
+
+    <div class="timeline r r-4">
+      <div class="tl-step now">
+        <div class="marker">Semana 1</div>
+        <div class="dot"></div>
+        <h5>Indexación inicial</h5>
+        <p>Crawlers de IA detectan y leen las nuevas páginas. Submit del sitemap en Search Console acelera esto.</p>
+      </div>
+      <div class="tl-step">
+        <div class="marker">Mes 1</div>
+        <div class="dot"></div>
+        <h5>Rich results</h5>
+        <p>Schemas validados aparecen como "rich results" en Google. Tráfico orgánico llega a las guías nuevas.</p>
+      </div>
+      <div class="tl-step">
+        <div class="marker">Mes 2-3</div>
+        <div class="dot"></div>
+        <h5>Primeras citaciones</h5>
+        <p>Perplexity y Google AI Overviews — los más rápidos — empiezan a citar sclavijo.com en respuestas.</p>
+      </div>
+      <div class="tl-step">
+        <div class="marker">Mes 3-6</div>
+        <div class="dot"></div>
+        <h5>Tráfico medible</h5>
+        <p>Referrers de chatgpt.com, claude.ai y perplexity.ai en Google Analytics. La señal más clara.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 14 — TEST IT
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Pruébelo usted misma</div>
+      <h2 class="title lg serif r r-2">
+        Esta noche —<br>
+        abra ChatGPT.<br>
+        <em>Pregunte.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          No tiene que esperar al reporte. Pruebe los prompts a la derecha en
+          ChatGPT, Claude o Perplexity. Repita cada cierto tiempo.
+        </p>
+        <p>
+          Si su nombre aparece — <em>perfecto.</em> Si no aparece todavía,
+          es paciencia: las IAs actualizan sus fuentes con ritmos distintos.
+        </p>
+      </div>
+    </div>
+
+    <div class="prompts r r-4">
+      <div class="prompt" onclick="copyPrompt(this)" data-text="Who is the best immigration lawyer in Miami?">
+        <div class="prompt-text">"Who is the best immigration lawyer in Miami?"</div>
+        <div class="prompt-copy"></div>
+      </div>
+      <div class="prompt" onclick="copyPrompt(this)" data-text="Minimum EB-5 investment 2026">
+        <div class="prompt-text">"Minimum EB-5 investment 2026"</div>
+        <div class="prompt-copy"></div>
+      </div>
+      <div class="prompt" onclick="copyPrompt(this)" data-text="Best O-1 visa attorney Miami">
+        <div class="prompt-text">"Best O-1 visa attorney Miami"</div>
+        <div class="prompt-copy"></div>
+      </div>
+      <div class="prompt" onclick="copyPrompt(this)" data-text="Sandra Clavijo immigration attorney">
+        <div class="prompt-text">"Sandra Clavijo immigration attorney"</div>
+        <div class="prompt-copy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 15 — NEXT STEPS
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">El siguiente capítulo</div>
+      <h2 class="title lg serif r r-2">
+        Lo que sigue —<br>
+        <em>cuando esté lista.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          El sitio ya está al cien por ciento. Estas son las acciones que
+          <em>amplifican el impacto</em> — todas humanas, todas opcionales.
+        </p>
+        <p>
+          Lo más importante es lo primero: <strong>reseñas verificadas en Google</strong>.
+          Es la palanca más fuerte para búsquedas locales.
+        </p>
+      </div>
+    </div>
+
+    <div class="roadmap r r-4">
+      <div class="road-item">
+        <div class="when">Prioridad I</div>
+        <h4>Reseñas en Google Business</h4>
+        <p>Pedir a clientes recientes reseñas verificadas. Sugerir frases naturales como "Best EB-5 attorney" o "Sandra Clavijo helped me".</p>
+      </div>
+      <div class="road-item">
+        <div class="when">Prioridad II</div>
+        <h4>Perfiles verificables</h4>
+        <p>Florida Bar profile, AILA directory, Avvo — los tres directorios que las IAs cruzan para verificar credenciales.</p>
+      </div>
+      <div class="road-item">
+        <div class="when">Prioridad III</div>
+        <h4>LinkedIn + podcasts hispanos</h4>
+        <p>Una publicación cada semana en LinkedIn. Pitch a 3-5 podcasts hispanos sobre inmigración o emprendimiento latino.</p>
+      </div>
+      <div class="road-item">
+        <div class="when">Largo plazo</div>
+        <h4>Quoted en medios grandes</h4>
+        <p>Telemundo, Univisión, Forbes, Bloomberg. Cada mención externa fortalece la autoridad en el grafo de las IAs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 16 — CLOSING (DEEP NAVY)
+     ============================================ -->
+<section class="slide deep" data-bg="navy">
+  <span class="ghost" style="font-size: 40vw; bottom: -10vw; right: -5vw; color: var(--gold);">DM</span>
+
+  <div class="closing">
+    <div class="closing-mark r r-1">— Un cierre, no un final —</div>
+
+    <h2 class="title xxl serif r r-2" style="color: #fff;">
+      De invisible<br>
+      <em>a citada.</em>
+    </h2>
+    <div class="title-underline" style="margin: 0 auto;">
+      <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+    </div>
+
+    <p class="body r r-3" style="margin: 40px auto 0; text-align: center; max-width: 580px;">
+      Sandra — su firma es ahora una de las pocas prácticas de inmigración en Miami
+      genuinamente preparada para la era de la IA. Gracias por la confianza.
+    </p>
+
+    <div class="closing-meta r r-4">
+      <div>
+        Implementador
+        <strong>Daniel Muñoz</strong>
+      </div>
+      <div>
+        Estudio
+        <strong>Ceibatic</strong>
+      </div>
+      <div>
+        Junio
+        <strong>2026</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <script>
-  // Progress bar
+  // =================== PROGRESS ===================
   const progress = document.getElementById('progress');
-  const masthead = document.getElementById('masthead');
+  const ccurrent = document.getElementById('ccurrent');
+  const counter = document.getElementById('counter');
+  const slides = document.querySelectorAll('.slide');
+  document.getElementById('ctotal').textContent = String(slides.length).padStart(2, '0');
+
   function updateProgress() {
     const h = document.documentElement;
     const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
     progress.style.width = scrolled + '%';
-    if (h.scrollTop > 500) masthead.classList.add('show');
-    else masthead.classList.remove('show');
   }
   window.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-    reveals.forEach(r => io.observe(r));
-  } else {
-    reveals.forEach(r => r.classList.add('in'));
+  // =================== REVEAL + COUNTER + DARK MODE COUNTER ===================
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        const idx = Array.from(slides).indexOf(e.target) + 1;
+        ccurrent.textContent = String(idx).padStart(2, '0');
+        // Dark counter for navy slides
+        const isDark = e.target.classList.contains('deep');
+        if (isDark) counter.classList.add('dark-mode');
+        else counter.classList.remove('dark-mode');
+        document.body.classList.toggle('dark-mode', isDark);
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => io.observe(s));
+
+  // =================== KEYBOARD NAV ===================
+  let scrollTimer = null;
+  function scrollToSlide(direction) {
+    if (scrollTimer) return;
+    const current = parseInt(ccurrent.textContent, 10) - 1;
+    const target = Math.max(0, Math.min(slides.length - 1, current + direction));
+    slides[target].scrollIntoView({ behavior: 'smooth' });
+    scrollTimer = setTimeout(() => { scrollTimer = null; }, 700);
   }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      scrollToSlide(1);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      scrollToSlide(-1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      slides[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      slides[slides.length - 1].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // =================== COPY PROMPT ===================
+  function copyPrompt(el) {
+    const text = el.dataset.text;
+    navigator.clipboard.writeText(text).then(() => {
+      el.classList.add('copied');
+      setTimeout(() => el.classList.remove('copied'), 1800);
+    });
+  }
+  window.copyPrompt = copyPrompt;
+
+  // First slide visible immediately
+  setTimeout(() => slides[0].classList.add('visible'), 50);
 </script>
 
 </body>
