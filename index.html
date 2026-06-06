@@ -796,6 +796,112 @@ body {
 .a11y-demo .toggle.off::after { right: auto; left: 2px; }
 
 /* ============================================
+   FORM FILTERS (slide 12 — bonus II)
+   ============================================ */
+.filter-stack { display: flex; flex-direction: column; gap: 18px; }
+
+.filter-card {
+  background: transparent;
+  position: relative;
+}
+.filter-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+.filter-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot-strict { background: #d97706; box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.18); }
+.dot-mild { background: var(--navy); box-shadow: 0 0 0 3px rgba(10, 46, 92, 0.12); }
+
+/* Strict mockup (amber warning) */
+.warn-mock {
+  background: #fffbeb;
+  border: 1.5px solid #fbbf24;
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-size: 12.5px;
+}
+.warn-mock-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #78350f;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.warn-mock-body {
+  font-size: 11.5px !important;
+  color: var(--charcoal) !important;
+  line-height: 1.55 !important;
+  margin: 0 0 10px !important;
+  max-width: none !important;
+}
+.warn-mock-body .red {
+  color: #b91c1c;
+  font-weight: 700;
+}
+.warn-mock-criteria {
+  background: #fff;
+  border: 1px solid #fcd34d;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 10.5px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  margin-bottom: 10px;
+}
+.warn-mock-criteria .check {
+  color: #16a34a;
+  font-weight: 700;
+  margin-right: 4px;
+}
+.warn-mock-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #fcd34d;
+  font-size: 10.5px;
+  color: var(--charcoal);
+}
+.warn-mock-consent input { accent-color: #d4a017; margin-top: 2px; flex-shrink: 0; }
+
+/* Mild mockup */
+.mild-mock {
+  background: #f5f0e8;
+  border: 1px solid rgba(10, 46, 92, 0.18);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.mild-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.mild-body {
+  font-size: 11.5px !important;
+  color: var(--charcoal) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+.mild-body strong { color: var(--navy); }
+
+/* ============================================
    THE NUMBERS (slide 12 deep)
    ============================================ */
 .numbers-row {
@@ -1902,10 +2008,111 @@ body {
 
 
 <!-- ============================================
-     SLIDE 12 — THE NUMBERS (DEEP)
+     SLIDE 12 — BONUS II · FORM FILTERS
+     ============================================ -->
+<section class="slide">
+  <div class="s-grid">
+    <div>
+      <div class="eyebrow r r-1">Bonus II · Filtros en formularios</div>
+      <h2 class="title lg serif r r-2">
+        Y de paso —<br>
+        <em>aclaramos qué somos.</em>
+      </h2>
+      <div class="title-underline">
+        <svg viewBox="0 0 88 8"><path d="M2,4 C20,1.5 40,6.5 60,3.5 C72,1.5 80,4.5 86,3"/></svg>
+      </div>
+      <div class="body r r-3" style="margin-top: 28px;">
+        <p>
+          Notamos un patrón: a los formularios llegaban personas pensando
+          que ofrecíamos empleo o que patrocinábamos visas de trabajo. El
+          <strong>EB-2 NIW era el peor caso</strong>, por la palabra "trabajo"
+          que muchos asocian con la visa.
+        </p>
+        <p>
+          Sumamos <strong>dos niveles de claridad</strong> según el riesgo
+          del formulario:
+        </p>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--muted); font-size: 0.95rem;">
+          → EB-2 NIW: bloque ⚠️ ámbar al inicio + cinco opciones de educación
+          + pregunta condicional que aparece solo si la respuesta lo amerita
+          + checkbox obligatorio de consentimiento.
+        </p>
+        <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--muted); font-size: 0.95rem;">
+          → Los otros diez formularios: un aviso informativo en colores
+          de marca. Claro, pero sin alarmar.
+        </p>
+        <p style="font-size: 0.92rem;">
+          La filosofía: <em>aclarar lo que somos, sin asustar al lead bueno.</em>
+          Las opciones que antes podrían bloquear, ahora muestran un mensaje
+          tipo "es improbable que califiques, pero puedes continuar si quieres
+          hablar con una abogada".
+        </p>
+      </div>
+    </div>
+
+    <div class="filter-stack r r-4">
+
+      <!-- STRICT (EB-2 NIW) -->
+      <div class="filter-card">
+        <div class="filter-label">
+          <span class="filter-dot dot-strict"></span>
+          Estricto · sólo EB-2 NIW
+        </div>
+        <div class="warn-mock">
+          <div class="warn-mock-head">
+            <span>⚠️</span>
+            <span>Importante — Antes de continuar, lee con atención:</span>
+          </div>
+          <p class="warn-mock-body">
+            Somos un <strong>bufete legal de inmigración</strong>.
+            <span class="red">NO ofrecemos empleos</span>, NO somos
+            agencia de trabajo, NO conseguimos contratos laborales en
+            EE.UU. y NO patrocinamos visas de trabajo.
+          </p>
+          <div class="warn-mock-criteria">
+            Para calificar generalmente necesitas:<br>
+            <span class="check">✓</span> Maestría, Doctorado o equivalente, O bien<br>
+            <span class="check">✓</span> Pregrado + 5 años de experiencia, O<br>
+            <span class="check">✓</span> Habilidad excepcional comprobable
+          </div>
+          <div class="warn-mock-consent">
+            <input type="checkbox" disabled checked />
+            <span>
+              Entiendo que <strong>Sandra Clavijo Law es un bufete legal</strong>
+              y <strong>NO ofrece empleo</strong> ni contratos laborales en EE.UU.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MILD (otros 10 forms) -->
+      <div class="filter-card">
+        <div class="filter-label">
+          <span class="filter-dot dot-mild"></span>
+          Suave · los otros diez formularios
+        </div>
+        <div class="mild-mock">
+          <span class="mild-icon">⚖️</span>
+          <p class="mild-body">
+            <strong>Sandra Clavijo Law es un bufete de inmigración.</strong>
+            Representamos a clientes ante USCIS en procesos migratorios
+            legales y cobramos honorarios profesionales por el servicio.
+            No ofrecemos empleos, no somos agencia de trabajo y no
+            patrocinamos visas laborales.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SLIDE 13 — THE NUMBERS (DEEP)
      ============================================ -->
 <section class="slide deep" data-bg="navy">
-  <span class="ghost" style="font-size: 32vw; bottom: -8vw; left: -4vw; color: var(--gold);">VI</span>
+  <span class="ghost" style="font-size: 32vw; bottom: -8vw; left: -4vw; color: var(--gold);">VII</span>
 
   <div class="s-center">
     <div class="eyebrow r r-1">Los recibos</div>
